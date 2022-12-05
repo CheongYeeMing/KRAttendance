@@ -189,7 +189,11 @@
                               <td><%= event.start %></td>
                               <td><%= event.end %></td>
                               <td>Attending</td>
-                              <td><%= link_to 'Update Attendance', home_path, method: :get, class: 'btn btn-primary' %></td>
+                              <% if @attendences.present? && @attendences.where(event_id: event.id).select{|a| a.user_id == current_user.id}.present? %>
+                                <td><%= link_to 'Update Attendance', edit_attendance_path(:attendance_param => { :event_id => event.id }, :id => @attendance.id), method: :get, class: 'btn btn-primary' %></td>
+                              <% else %>
+                                <td><%= link_to 'Update Attendance', new_attendance_path(:attendance_param => { :event_id => event.id }), method: :get, class: 'btn btn-primary' %></td>
+                              <% end %>
                               <% if current_user.role == "leader" %>
                                 <td><%= link_to '', edit_event_path(:event_param => { :cca_id => @cca.id }, :id => event.id), class: 'fa fa-pencil' %></td>
                                 <td>

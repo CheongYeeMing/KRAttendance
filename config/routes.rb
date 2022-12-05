@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :attendances
   resources :events
   resources :ccas
   devise_for :users, controllers: {

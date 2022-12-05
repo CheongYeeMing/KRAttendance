@@ -12,6 +12,7 @@ class CcasController < ApplicationController
   def show
     @cca_members = @cca.members
     @events = Event.where(cca_id: params[:id])
+    @attendances = Attendance.all
   end
 
   # GET /ccas/new
