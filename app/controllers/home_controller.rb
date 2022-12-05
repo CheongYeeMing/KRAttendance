@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :user_logged_in, only: [:profile]
+  before_action :user_logged_in, only: %i[:profile :index]
 
   def index
     @title = "Co-Curricular Activities"
