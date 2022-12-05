@@ -79,3 +79,19 @@
 .cca-item-user-text {
   margin-left: 12px;
 }
+
+.status-incomplete {
+  height: 12px;
+  width: 12px;
+  background-color: rgb(255, 0, 0);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-completed {
+  height: 12px;
+  width: 12px;
+  background-color: rgb(34, 255, 0);
+  border-radius: 50%;
+  display: inline-block;
+}
