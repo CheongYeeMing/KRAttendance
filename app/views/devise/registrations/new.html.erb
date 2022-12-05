@@ -1,0 +1,109 @@
+<!--<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>-->
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-3 devise-col">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "needs-validation", novalidate: true }) do |f| %>
+        <h2 class="devise-reg-h2">Sign up</h2>
+        <div class="form-group" >
+          <%= f.label :name, for: 'validationCustom01' %><br />
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' , id: 'validationCustom01', required: true %>
+        </div>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please provide a valid name!
+        </div>
+        <div class="form-group">
+          <%= f.label :avatar %><br />
+          <%= f.file_field :avatar, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :email, for: 'validationCustom02' %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' , id: 'validationCustom02', required: true %>
+        </div>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please provide a valid email!
+        </div>
+        <div class="form-group">
+          <%= f.label :password , for: 'validationCustom03'%>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', id: 'validationCustom03', required: true %>
+        </div>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please provide a valid password!
+        </div>
+        <div class="form-group">
+          <%= f.label :password_confirmation, for: 'validationCustom04' %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', id: 'validationCustom04', required: true %>
+        </div>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Passwords do not match!
+        </div>
+        <div class="actions">
+          <%= f.submit "Sign up", class: 'btn btn-primary devise-btn'%>
+        </div>
+        <%= render "devise/shared/links"%><br/>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(f) {
+        f.addEventListener('submit', function(event) {
+          if (f.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          f.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>

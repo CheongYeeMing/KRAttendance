@@ -1,0 +1,10 @@
+<div class="container-fluid">
+  <%= link_to 'Back', cca_path(@cca), class: "btn btn-primary new-back-btn" %>
+  <div class="row justify-content-center">
+    <div class="col-4 new-col">
+      <h2 class="heading">New Event</h2>
+      <br/>
+      <%= render 'form', event: @event, users: @users %>
+    </div>
+  </div>
+</div>

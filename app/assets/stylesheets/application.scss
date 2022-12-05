@@ -1,0 +1,221 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *= require font-awesome
+ *= require bootstrap4-datetimepicker.min.css
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap-datetimepicker";
+
+body {
+  background-image: image-url("sieushi_graphic_designer_2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  background-color: #464646;
+  background-attachment: fixed;
+}
+h1 {
+  font-size: 60px;
+  // text-shadow: h-shadow v-shadow blur-radius color|none|initial|inherit;
+  text-shadow: 1px 1px 10px #000000;
+  color: #ffffff;
+}
+h2 {
+  // text-shadow: h-shadow v-shadow blur-radius color|none|initial|inherit;
+  text-shadow: 1px 1px 10px #000000;
+}
+
+.devise-col {
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin-top: 30px;
+}
+
+.devise-col-2 {
+  margin-bottom: 30px;
+}
+
+.devise-h2 {
+  font-size: 25px;
+  margin-top: 25px;
+  text-shadow: none;
+}
+
+.devise-h3 {
+  margin-top: 15px;
+}
+
+.devise-form-ctn {
+  margin-top: 15px;
+}
+
+.devise-img {
+  width: 150px;
+  height: 150px;
+  margin-top: -2px;
+}
+
+.devise-btn {
+  margin-bottom: 10px;
+}
+
+.devise-reg-h2 {
+  font-size: 25px;
+  color: #000000;
+  margin-top: 15px;
+  text-shadow: none;
+}
+
+.devise-destroy-link {
+  color: #ffffff;
+}
+
+.nav-outer {
+  height: 45px;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.nav-brand {
+  margin-left: 10px;
+  color: #ffffff;
+}
+
+.nav-brand-word {
+  color: #ffffff;
+}
+.nav-brand-word:hover {
+  color: #ff7878;
+}
+
+.nav-logo {
+  width: 40px;
+  height: 40px;
+  margin-top: -2px;
+}
+
+.nav-item-link {
+  color: #bbbbbb;
+  text-decoration: none;
+}
+
+.nav-item-dropdown {
+  margin-left: 10px;
+}
+
+.nav-profile-icon {
+  width: 30px;
+  height: 30px;
+  margin-top: -2px;
+}
+
+.nav-view-profile-link {
+  color: #ff7878;
+}
+
+.nav-admin-link {
+  color: #000000;
+  text-decoration: none;
+}
+
+.nav-login-link {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.nav-dropdown-btn {
+  border: 2px;
+  border-color: #ff7878;
+  color: #ff7878;
+  border-style: solid;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.nav-item .nav-link {
+  margin-top: 10px;
+  color: #bbbbbb;
+}
+.nav-item .nav-link:hover {
+  background-color: #ff7878;
+  color: #ffffff;
+}
+.nav-item:hover {
+  color: #ffffff;
+}
+button.btn.btn-primary.btn-lg {
+  background-color: #464646;
+}
+button.btn.btn-primary.btn-lg:hover {
+  background-color: #ff7878;
+}
+a.btn.btn-primary {
+  background-color: #464646;
+  border: none;
+}
+a.btn.btn-primary:hover {
+  background-color: #ff7878;
+}
+
+.file_droparea {
+  border: 1px dashed black;
+  border-radius: 4px;
+  background-color: none;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 26px 20px 30px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  text-align: center;
+  cursor: pointer;
+  &.is-active,
+  &:focus,
+  &:hover {
+    border-color: #ff7878;
+    background-color: #bef2ff;
+  }
+}
+
+.file_msg {
+  color: #000000;
+  font-size: medium;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: calc(100% - 130px);
+  vertical-align: middle;
+  margin-top: 10px;
+}
+
+.file_input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0;
+  &:focus {
+    outline: none;
+  }
+}
+
+.clickable-tr {
+  cursor: pointer;
+}

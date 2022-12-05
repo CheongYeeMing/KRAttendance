@@ -1,0 +1,19 @@
+<div class="container outer-ctn">
+  <h1 style="text-align: center"><%= @title %></h1>
+  <div class="row index-row" >
+    <% if @ccas.present? %>
+      <% @ccas.each do |cca| %>
+        <div class="card cca-card">
+          <a class="img-fluid">
+            <%= render_cca_image(cca) %>
+          </a>
+          <div class="card-body">
+            <h5 class="card-title cca-title"><%= cca.name %></h5>
+            <p class="card-text cca-txt-2">Members: <%= cca.members.count %></p>
+            <a href="/ccas/<%= cca.id%>" class="btn btn-primary browse-btn">Browse More</a>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

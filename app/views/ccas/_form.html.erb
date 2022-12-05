@@ -1,0 +1,112 @@
+<script>
+  $(document).ready(() => {
+    $('.select-leaders').select2();
+    $('.select-members').select2();
+    document.addEventListener("turbolinks:before-cache", function () {
+      $('.select-leaders').select2('destroy');
+      $('.select-members').select2('destroy');
+    });
+  })
+</script>
+<%= form_with(model: @cca.becomes(Cca), local: true) do |form| %>
+  <% if current_user.admin? %>
+    <div class="form-group text-left enable-validation-icons">
+      <%= form.label :name%><br/>
+      <%= form.text_field :name, autofocus: true, autocomplete: "content", class: "form-control"%>
+    </div>
+    <div class="form-group text-left">
+      <%= form.label :description %><br/>
+      <%= form.text_field :description, autofocus: true, autocomplete: "content", class: "form-control"%>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <!--Avatar Upload Field-->
+        <div class="field">
+          <%= form.label :avatars %><br />
+          <div class="form-block_container form-head">
+            <div class="form-block_input">
+              <div class="form-block_avatar_file">
+                <div class="file_droparea">
+                  <p class="file_msg js-set-number">Choose your files or drag them here</p>
+                  <%= form.file_field :avatars, multiport: false, class: "file_input", type: :file, multiple: true, autofocus: true, autocomplete: "content" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <!--Avatar Upload Field-->
+      </div>
+    </div>
+    <div class="form-group text-left">
+      <%= form.label :leaders_ids %><br/>
+      <%= form.select :leaders_ids, options_for_select(@users.map { |user| [user.name + " [" + user.email + "]", user.id]},
+                                            selected = nil), {}, id: "LeadersSelect", multiple: true, class: "form-control select-leaders" %>
+    </div>
+  <% else %>
+    <div class="form-group text-left">
+      <%= form.label :members_ids %><br/>
+      <%= form.select :members_ids, options_for_select(@users.map { |user| [user.name + " [" + user.email + "]", user.id]},
+                                            selected = nil), {}, id: "MembersSelect", multiple: true, class: "form-control select-members" %>
+    </div>
+  <% end %>
+  <% if @cca.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cca.errors.count, "error") %> prohibited this cca from being saved:</h2>
+      <ul>
+        <% @cca.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= form.submit "Submit", class: 'btn btn-primary form-btn' %>
+  </div>
+<% end %>
+<script>
+  var $fileInput = $(".file_input");
+  var $droparea = $(".file_droparea");
+
+  $fileInput.on("dragenter focus click", function () {
+    $droparea.addClass("is-active");
+  });
+
+  $fileInput.on("dragleave blur drop", function () {
+    $droparea.removeClass("is-active");
+  });
+
+  $fileInput.on("change", function () {
+    console.log("hello why u not working");
+    var filesCount = $(this)[0].files.length;
+    var $textContainer = $(this).prev(".js-set-number");
+    if (filesCount === 1) {
+      $textContainer.text($(this).val().split("\\").pop());
+    } else {
+      $textContainer.text(filesCount + " uploaded files");
+    }
+  });
+
+  $(document).ready(function() {
+      $('.select_or_create_days').select2({
+        allowClear: true,
+        closeOnSelect: false,
+        tags: true,
+        multiple: true,
+        createDay: function (params) {
+          return {
+            id: params.term,
+            text: params.term,
+            newOption: true
+          }
+        }
+      })
+    });
+</script>
+<script type = "text/javascript">
+  $(function () {
+      $('#timepicker').datetimepicker({
+          format: 'LT'
+      });
+  });
+</script>
