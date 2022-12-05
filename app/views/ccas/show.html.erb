@@ -150,7 +150,7 @@
                               <td><%= event.location %></td>
                               <td><%= event.start %></td>
                               <td><%= event.end %></td>
-                              <td><%= link_to '', edit_event_path(event), class: 'fa fa-pencil' %></td>
+                              <td><%= link_to '', edit_event_path(:event_param => { :cca_id => @cca.id }, :id => event.id), class: 'fa fa-pencil' %></td>
                               <td>
                                 <button type="button" data-target="#deleteModal<%= event.id %>" data-toggle="modal" class="btn btn-danger btn-sm remove">Delete</button>
                                 <div class="modal fade" id="deleteModal<%= event.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
