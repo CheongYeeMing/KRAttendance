@@ -1,17 +1,38 @@
+<script>
+  $(document).ready(() => {
+    $('.select-attendance').select2();
+    document.addEventListener("turbolinks:before-cache", function () {
+      $('.select-attendance').select2('destroy');
+    });
+  })
+</script>
 <%= form_with(model: attendance, local: true) do |form| %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <%= form.hidden_field :event_id, value: @event.id %>
+  <div class="field">
+    <%= form.label :CCA %>
+    <%= form.text_field :CCA, value: @cca.name, class: "form-control", readonly: true %>
+  </div>
+  <div class="field">
+    <%= form.label :Event %>
+    <%= form.text_field :event, value: @event.name, class: "form-control", readonly: true %>
+  </div>
+  <div class="form-group text-left">
+    <%= form.label :Attending %><br/>
+    <%= form.select :attending, options_for_select(["Attending", "Not Attending"].map { |ans| [ans, ans]},
+                                            selected = nil), {}, id: "AttendingSelect",  class: "form-control select-attendance" %>
+  </div>
   <% if attendance.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
-
       <ul>
-      <% attendance.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% attendance.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Submit Attendance", class: 'btn btn-primary form-btn' %>
   </div>
 <% end %>

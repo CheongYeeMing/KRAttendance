@@ -143,7 +143,16 @@
                             <tr class="clickable-tr" href="#">
                               <td><%= member.name %></td>
                               <% @events.each do |event| %>
-                                <td><span class="status-completed"></span></td>
+                                <% if @attendances.present? && @attendances.where(event_id: event.id).select{|a| a.user_id == member.id}.present? %>
+                                  <% @attendance = @attendances.where(event_id: event.id).select{|a| a.user_id == member.id}.first %>
+                                  <% if @attendance.attending == "Attending" %>
+                                    <td><span class="status-completed"></span></td>
+                                  <% else %>
+                                    <td><span class="status-incomplete"></span></td>
+                                  <% end %>
+                                <% else %>
+                                  <td><span class="status-incomplete"></span></td>
+                                <% end %>
                               <% end %>
                             </tr>
                           <% end %>
@@ -189,10 +198,11 @@
                               <td><%= event.start %></td>
                               <td><%= event.end %></td>
                               <td>Attending</td>
-                              <% if @attendences.present? && @attendences.where(event_id: event.id).select{|a| a.user_id == current_user.id}.present? %>
-                                <td><%= link_to 'Update Attendance', edit_attendance_path(:attendance_param => { :event_id => event.id }, :id => @attendance.id), method: :get, class: 'btn btn-primary' %></td>
+                              <% if @attendances.present? && @attendances.where(event_id: event.id).select{|a| a.user_id == current_user.id}.present? %>
+                                <% @attendance = @attendances.where(event_id: event.id).select{|a| a.user_id == current_user.id}.first %>
+                                <td><%= link_to 'Update Attendance', edit_attendance_path(:attendance_param => { :event_id => event.id, :cca_id => @cca.id }, :id => @attendance.id), method: :get, class: 'btn btn-primary' %></td>
                               <% else %>
-                                <td><%= link_to 'Update Attendance', new_attendance_path(:attendance_param => { :event_id => event.id }), method: :get, class: 'btn btn-primary' %></td>
+                                <td><%= link_to 'Create Attendance', new_attendance_path(:attendance_param => { :event_id => event.id, :cca_id => @cca.id }), method: :get, class: 'btn btn-primary' %></td>
                               <% end %>
                               <% if current_user.role == "leader" %>
                                 <td><%= link_to '', edit_event_path(:event_param => { :cca_id => @cca.id }, :id => event.id), class: 'fa fa-pencil' %></td>

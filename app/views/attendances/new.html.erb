@@ -1,5 +1,10 @@
-<h1>New Attendance</h1>
-
-<%= render 'form', attendance: @attendance %>
-
-<%= link_to 'Back', attendances_path %>
+<div class="container-fluid">
+  <%= link_to 'Back', ccas_path, class: "btn btn-primary new-back-btn" %>
+  <div class="row justify-content-center">
+    <div class="col-4 new-col">
+      <h2 class="heading">New Attendance</h2>
+      <br/>
+      <%= render 'form', attendance: @attendance, cca: @cca, event: @event %>
+    </div>
+  </div>
+</div>

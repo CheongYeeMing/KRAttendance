@@ -22,11 +22,11 @@ class AttendancesController < ApplicationController
 
   # POST /attendances or /attendances.json
   def create
-    @attendance = Attendance.new(attendance_params)
+    @attendance = Attendance.new(attendance_params.except(:CCA, :event, :cca_id))
 
     respond_to do |format|
       if @attendance.save
-        format.html { redirect_to attendance_url(@attendance), notice: "Attendance was successfully created." }
+        format.html { redirect_to cca_url(CcasController.getBrowsingCca), notice: "Attendance was successfully created." }
         format.json { render :show, status: :created, location: @attendance }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,8 +38,8 @@ class AttendancesController < ApplicationController
   # PATCH/PUT /attendances/1 or /attendances/1.json
   def update
     respond_to do |format|
-      if @attendance.update(attendance_params)
-        format.html { redirect_to cca_url(attendance_params[:cca_id]), notice: "Attendance was successfully updated." }
+      if @attendance.update(attendance_params.except(:CCA, :event, :cca_id))
+        format.html { redirect_to cca_url(CcasController.getBrowsingCca), notice: "Attendance was successfully updated." }
         format.json { render :show, status: :ok, location: @attendance }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -66,12 +66,15 @@ class AttendancesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def attendance_params
-      params.require(:event).permit(:event_id, :cca_id)
+      params.require(:attendance).permit(:user_id, :event_id, :cca_id, :CCA, :event, :attending)
     end
 
     def set_event_cca
       @event = Event.find_by_id((params[:attendance_param])["event_id"])
+      puts (params[:attendance_param])["cca_id"]
       @cca = Cca.find_by_id((params[:attendance_param])["cca_id"])
+      puts "got cca or not"
+      puts @cca.name
       CcasController.setBrowsingCca(@cca)
     end
 end
